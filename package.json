@@ -1,0 +1,32 @@
+{
+  "name": "crc-hash",
+  "description": "A cryptographic Hash wrapper for the crc package.",
+  "version": "0.1.0",
+  "author": {
+    "name": "David Anson",
+    "url": "http://dlaa.me/"
+  },
+  "license": "MIT",
+  "main": "crc-hash.js",
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "dependencies": {
+    "crc": "^3.2.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^2.1.0"
+  },
+ "keywords": [
+    "crc",
+    "hash",
+    "crypto",
+    "stream",
+    "cyclic",
+    "redundancy",
+    "check"
+  ]
+}
