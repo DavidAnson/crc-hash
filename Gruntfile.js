@@ -37,7 +37,7 @@ module.exports = function(grunt) {
       args: [
         "cover",
         "node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/bin/nodeunit",
-        grunt.file.expand("crc-hash.js")]
+        grunt.file.expand("crc-hash-test.js")]
     }, function(error, result) {
       grunt.log.write(result.stdout);
       if (error) {

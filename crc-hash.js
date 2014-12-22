@@ -30,13 +30,14 @@ Crc32Hash.prototype._transform = function(chunk, encoding, callback) {
 };
 Crc32Hash.prototype._flush = function(callback) {
   var buffer = new Buffer(4);
-  buffer.writeUInt32BE(this.value, 0);
+  buffer.writeUInt32BE(this.value || 0, 0);
   this.push(buffer);
   callback();
 };
 
 /**
  * Creates and returns an object to compute CRC hash digests.
+ * The legacy update and digest methods are not supported.
  *
  * @param {string} algorithm CRC algorithm (supported values: crc32).
  * @return {Stream.Transform} Duplex stream like Crypto.Hash (unsupported methods: update, digest).
