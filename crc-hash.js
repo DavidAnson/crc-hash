@@ -24,7 +24,6 @@ function Crc32Hash(options) {
 util.inherits(Crc32Hash, Transform);
 
 // Transform function implementations
-/* eslint-disable no-underscore-dangle */
 Crc32Hash.prototype._transform = function(chunk, encoding, callback) {
   this.value = crc.crc32(chunk, this.value);
   callback();
@@ -35,7 +34,6 @@ Crc32Hash.prototype._flush = function(callback) {
   this.push(buffer);
   callback();
 };
-/* eslint-enable no-underscore-dangle */
 
 /**
  * Creates and returns an object to compute CRC hash digests.
