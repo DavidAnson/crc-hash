@@ -42,6 +42,9 @@ Crc32Hash.prototype._flush = function(callback) {
  * @return {Stream.Transform} Duplex stream like Crypto.Hash (unsupported methods: update, digest).
  */
 module.exports.createHash = function(algorithm) {
+  if (!algorithm) {
+    throw new Error("Missing algorithm.");
+  }
   if (algorithm === "crc32") {
     return new Crc32Hash();
   }
