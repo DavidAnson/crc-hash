@@ -15,22 +15,25 @@ var crc = require("crc");
 var Transform = stream.Transform;
 
 // Constructor
-function Crc32Hash(options) {
-  Transform.call(this, options);
+function CrcHash(implementation, resultSize) {
+  Transform.call(this);
+  this.implementation = implementation;
+  this.resultSize = resultSize;
   this.value = undefined;
 }
 
 // Subclass
-util.inherits(Crc32Hash, Transform);
+util.inherits(CrcHash, Transform);
 
 // Transform function implementations
-Crc32Hash.prototype._transform = function(chunk, encoding, callback) {
-  this.value = crc.crc32(chunk, this.value);
+CrcHash.prototype._transform = function(chunk, encoding, callback) {
+  this.value = this.implementation(chunk, this.value);
   callback();
 };
-Crc32Hash.prototype._flush = function(callback) {
-  var buffer = new Buffer(4);
-  buffer.writeUInt32BE(this.value || 0, 0);
+CrcHash.prototype._flush = function(callback) {
+  var buffer = new Buffer(this.resultSize);
+  var writeFunction = [null, null, null, buffer.writeUInt32BE][this.resultSize - 1];
+  writeFunction.call(buffer, this.value || 0, 0);
   this.push(buffer);
   callback();
 };
@@ -47,7 +50,7 @@ module.exports.createHash = function(algorithm) {
     throw new Error("Missing algorithm.");
   }
   if (algorithm === "crc32") {
-    return new Crc32Hash();
+    return new CrcHash(crc[algorithm], 4);
   }
   throw new Error("Unsupported algorithm.");
 };
