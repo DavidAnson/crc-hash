@@ -114,5 +114,59 @@ exports.crcHashTest = {
 
   crc32BufferInput: function(test) {
     testHashOutput(test, crcHash.createHash("crc32"), bufferInput("Hello world."), "8b3a0404");
+  },
+
+  //
+  // CRC-24
+  //
+  crc24CharacterInput: function(test) {
+    testHashOutput(test, crcHash.createHash("crc24"), characterInput("Hello world."), "8d7f80");
+  },
+
+  //
+  // CRC-16 Modbus
+  //
+  crc16modbusCharacterInput: function(test) {
+    testHashOutput(test, crcHash.createHash("crc16modbus"), characterInput("Hello world."), "319d");
+  },
+
+  //
+  // CRC-16 CCITT
+  //
+  crc16ccittCharacterInput: function(test) {
+    testHashOutput(test, crcHash.createHash("crc16ccitt"), characterInput("Hello world."), "4ccd");
+  },
+
+  //
+  // CRC-16
+  //
+  crc16CharacterInput: function(test) {
+    testHashOutput(test, crcHash.createHash("crc16"), characterInput("Hello world."), "33f9");
+  },
+
+  //
+  // CRC-8 1-Wire
+  //
+  crc81wireCharacterInput: function(test) {
+    testHashOutput(test, crcHash.createHash("crc81wire"), characterInput("Hello world."), "69");
+  },
+
+  //
+  // CRC-8
+  //
+  crc8CharacterInput: function(test) {
+    testHashOutput(test, crcHash.createHash("crc8"), characterInput("Hello world."), "0a");
+  },
+
+  //
+  // CRC-1
+  //
+  crc1CharacterInput: function(test) {
+    testHashOutput(test, crcHash.createHash("crc1"), characterInput("Hello world."), "6a");
+  },
+
+  // Copied from the crc package's test/crc1.spec.coffee
+  crc1SpecCharacterInput: function(test) {
+    testHashOutput(test, crcHash.createHash("crc1"), characterInput("1234567890"), "0d");
   }
 };

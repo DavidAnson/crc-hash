@@ -31,9 +31,9 @@ CrcHash.prototype._transform = function(chunk, encoding, callback) {
   callback();
 };
 CrcHash.prototype._flush = function(callback) {
-  var buffer = new Buffer(this.resultSize);
-  var writeFunction = [null, null, null, buffer.writeUInt32BE][this.resultSize - 1];
-  writeFunction.call(buffer, this.value || 0, 0);
+  var buffer = new Buffer(4);
+  buffer.writeUInt32BE(this.value || 0, 0);
+  buffer = buffer.slice(4 - this.resultSize);
   this.push(buffer);
   callback();
 };
@@ -42,15 +42,33 @@ CrcHash.prototype._flush = function(callback) {
  * Creates and returns an object to compute CRC hash digests.
  * The legacy update and digest methods are not supported.
  *
- * @param {string} algorithm CRC algorithm (supported values: crc32).
+ * @param {string} algorithm CRC algorithm (supported values: crc1, crc8, crc81wire, crc16, crc16ccitt, crc16modbus, crc24, crc32).
  * @return {Stream.Transform} Duplex stream like Crypto.Hash (unsupported methods: update, digest).
  */
 module.exports.createHash = function(algorithm) {
   if (!algorithm) {
     throw new Error("Missing algorithm.");
   }
-  if (algorithm === "crc32") {
-    return new CrcHash(crc[algorithm], 4);
+  var size;
+  switch (algorithm) {
+    case "crc1":
+    case "crc8":
+    case "crc81wire":
+      size = 1;
+      break;
+    case "crc16":
+    case "crc16ccitt":
+    case "crc16modbus":
+      size = 2;
+      break;
+    case "crc24":
+      size = 3;
+      break;
+    case "crc32":
+      size = 4;
+      break;
+    default:
+      throw new Error("Unsupported algorithm.");
   }
-  throw new Error("Unsupported algorithm.");
+  return new CrcHash(crc[algorithm], size);
 };
