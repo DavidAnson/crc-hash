@@ -79,7 +79,7 @@ exports.crcHashTest = {
   },
 
   //
-  // Node.js crypto MD5 (used to validate test harness)
+  // Node.js Crypto module MD5 (used to validate test harness)
   //
   md5NoInput: function(test) {
     testHashOutput(test, crypto.createHash("md5"), noInput(), "d41d8cd98f00b204e9800998ecf8427e");

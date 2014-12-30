@@ -39,11 +39,11 @@ CrcHash.prototype._flush = function(callback) {
 };
 
 /**
- * Creates and returns an object to compute CRC hash digests.
- * The legacy update and digest methods are not supported.
+ * Creates and returns a hash object which can be used to generate CRC hash digests.
+ * Note: The legacy update and digest methods of the Hash class are not supported.
  *
- * @param {string} algorithm CRC algorithm (supported values: crc1, crc8, crc81wire, crc16, crc16ccitt, crc16modbus, crc24, crc32).
- * @return {Stream.Transform} Duplex stream like Crypto.Hash (unsupported methods: update, digest).
+ * @param {string} algorithm CRC algorithm (supported values: crc32, crc24, crc16, crc16ccitt, crc16modbus, crc8, crc81wire, crc1)
+ * @return {Stream.Transform} Duplex stream as with Crypto.Hash (unsupported methods: update, digest)
  */
 module.exports.createHash = function(algorithm) {
   if (!algorithm) {

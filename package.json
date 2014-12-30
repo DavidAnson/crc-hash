@@ -1,10 +1,18 @@
 {
   "name": "crc-hash",
-  "description": "A cryptographic Hash wrapper for the crc package.",
+  "description": "A Crypto Hash (Stream) implementation for the CRC algorithm.",
   "version": "0.1.0",
+  "homepage": "https://github.com/DavidAnson/crc-hash",
   "author": {
     "name": "David Anson",
     "url": "http://dlaa.me/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DavidAnson/crc-hash.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DavidAnson/crc-hash/issues"
   },
   "license": "MIT",
   "main": "crc-hash.js",
