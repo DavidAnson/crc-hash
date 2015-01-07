@@ -25,25 +25,66 @@ function CrcHash(implementation, resultSize) {
 // Subclass
 util.inherits(CrcHash, Transform);
 
+// Helpers
+CrcHash.prototype.getResultBuffer = function() {
+  var buffer = new Buffer(4);
+  buffer.writeUInt32BE(this.value || 0, 0);
+  buffer = buffer.slice(4 - this.resultSize);
+  return buffer;
+};
+CrcHash.prototype.getErrorFunction = function(message) {
+  return function() {
+    throw new Error(message);
+  };
+};
+
 // Transform function implementations
 CrcHash.prototype._transform = function(chunk, encoding, callback) {
   this.value = this.implementation(chunk, this.value);
   callback();
 };
 CrcHash.prototype._flush = function(callback) {
-  var buffer = new Buffer(4);
-  buffer.writeUInt32BE(this.value || 0, 0);
-  buffer = buffer.slice(4 - this.resultSize);
+  var buffer = this.getResultBuffer();
   this.push(buffer);
   callback();
 };
 
+// Legacy update/digest support
+CrcHash.prototype.update = function(data, encoding) {
+  // Validate data parameter
+  if ((typeof data !== "string") && !(data instanceof Buffer)) {
+    throw new Error("Not a string or buffer");
+  }
+  if (!(data instanceof Buffer)) {
+    // Normalize encoding parameter
+    if ((encoding !== "utf8") && (encoding !== "ascii") && (encoding !== "binary")) {
+      encoding = "binary";
+    }
+    // Create Buffer for data
+    data = new Buffer(data, encoding);
+  }
+  // Update hash and return
+  this.value = this.implementation(data, this.value);
+  return this;
+};
+CrcHash.prototype.digest = function(encoding) {
+  // hash object can not be used after digest method has been called
+  this.update = this.getErrorFunction("HashUpdate fail");
+  this.digest = this.getErrorFunction("Not initialized");
+  // Unsupported encoding returns a Buffer
+  if ((encoding !== "hex") && (encoding !== "binary") && (encoding !== "base64")) {
+    encoding = null;
+  }
+  // Return Buffer or encoded string
+  var buffer = this.getResultBuffer();
+  return encoding ? buffer.toString(encoding) : buffer;
+};
+
 /**
- * Creates and returns a hash object which can be used to generate CRC hash digests.
- * Note: The legacy update and digest methods of the Hash class are not supported.
+ * Creates and returns a hash object which can be used to generate CRC hash digests
  *
  * @param {string} algorithm CRC algorithm (supported values: crc32, crc24, crc16, crc16ccitt, crc16modbus, crc8, crc81wire, crc1)
- * @return {Stream.Transform} Duplex stream as with Crypto.Hash (unsupported methods: update, digest)
+ * @return {Stream.Transform} Duplex stream as with Crypto.Hash (including legacy update/digest methods)
  */
 module.exports.createHash = function(algorithm) {
   if (!algorithm) {

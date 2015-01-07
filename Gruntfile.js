@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 
     // Unit tests
     nodeunit: {
-      files: ["crc-hash-test.js"]
+      files: ["*-test.js"]
     },
 
     // Watcher
@@ -37,7 +37,8 @@ module.exports = function(grunt) {
       args: [
         "cover",
         "node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/bin/nodeunit",
-        grunt.file.expand("crc-hash-test.js")]
+        grunt.file.expand("crc-hash-test.js"),
+        grunt.file.expand("crc-hash-legacy-test.js")]
     }, function(error, result) {
       grunt.log.write(result.stdout);
       if (error) {
