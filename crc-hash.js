@@ -81,10 +81,10 @@ CrcHash.prototype.digest = function(encoding) {
 };
 
 /**
- * Creates and returns a hash object which can be used to generate CRC hash digests
+ * Creates and returns a hash object which can be used to generate CRC hash digests.
  *
- * @param {string} algorithm CRC algorithm (supported values: crc32, crc24, crc16, crc16ccitt, crc16modbus, crc8, crc81wire, crc1)
- * @return {Stream.Transform} Duplex stream as with Crypto.Hash (including legacy update/digest methods)
+ * @param {string} algorithm CRC algorithm (supported values: crc32, crc24, crc16, crc16ccitt, crc16modbus, crc8, crc81wire, crc1).
+ * @return {Stream.Transform} Duplex stream as with Crypto.Hash (including legacy update/digest methods).
  */
 module.exports.createHash = function(algorithm) {
   if (!algorithm) {

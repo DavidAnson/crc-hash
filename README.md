@@ -29,10 +29,9 @@ All algorithms implemented by `crc` are supported by `crc-hash`:
 ```
 /**
  * Creates and returns a hash object which can be used to generate CRC hash digests.
- * Note: The legacy update and digest methods of the Hash class are not supported.
  *
- * @param {string} algorithm CRC algorithm (supported values: crc32, crc24, crc16, crc16ccitt, crc16modbus, crc8, crc81wire, crc1)
- * @return {Stream.Transform} Duplex stream as with Crypto.Hash (unsupported methods: update, digest)
+ * @param {string} algorithm CRC algorithm (supported values: crc32, crc24, crc16, crc16ccitt, crc16modbus, crc8, crc81wire, crc1).
+ * @return {Stream.Transform} Duplex stream as with Crypto.Hash (including legacy update/digest methods).
  */
 createHash(algorithm)
 ```
@@ -55,4 +54,5 @@ See also:
 
 ## Release History
 
-* 0.1.0 - Initial release.
+* 0.1.0 - Initial release, supports Stream programming model.
+* 0.2.0 - Add support for legacy update/digest methods of Hash.
