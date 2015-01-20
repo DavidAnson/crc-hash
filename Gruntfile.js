@@ -7,18 +7,19 @@ module.exports = function(grunt) {
     // Linting
     eslint: {
       files: [
-        "*.js"
+        "*.js",
+        "test/*.js"
       ]
     },
 
     // Unit tests
     nodeunit: {
-      files: ["*-test.js"]
+      files: ["test/*.js"]
     },
 
     // Watcher
     watch: {
-      files: ["*.js"],
+      files: ["**/*.js"],
       tasks: ["default"]
     }
   });
@@ -27,26 +28,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-nodeunit");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-eslint");
-
-  // Custom task measures code coverage of unit tests via Istanbul (assumed to be installed globally)
-  grunt.registerTask("cover", "Code coverage via Istanbul", function() {
-    var done = this.async();
-    // Invoke CLI for simplicity
-    grunt.util.spawn({
-      cmd: "istanbul",
-      args: [
-        "cover",
-        "node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/bin/nodeunit",
-        grunt.file.expand("crc-hash-test.js"),
-        grunt.file.expand("crc-hash-legacy-test.js")]
-    }, function(error, result) {
-      grunt.log.write(result.stdout);
-      if (error) {
-        grunt.log.error(result.stderr);
-      }
-      done();
-    });
-  });
 
   // Default: Test and lint
   grunt.registerTask("default", ["nodeunit", "eslint"]);

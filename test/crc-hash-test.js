@@ -1,7 +1,7 @@
 "use strict";
 
 var crypto = require("crypto");
-var crcHash = require("./crc-hash");
+var crcHash = require("../crc-hash");
 
 function testHashOutput(test, hash, input, expected) {
   test.expect(1);
