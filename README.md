@@ -2,6 +2,12 @@
 
 > A Crypto Hash (Stream) implementation for the CRC algorithm.
 
+[![npm version][npm-image]][npm-url]
+[![GitHub tag][github-tag-image]][github-tag-url]
+[![Build status][travis-image]][travis-url]
+[![Code coverage][coveralls-image]][coveralls-url]
+[![License][license-image]][license-url]
+
 
 ## Overview
 
@@ -56,3 +62,15 @@ See also:
 
 * 0.1.0 - Initial release, supports Stream programming model.
 * 0.2.0 - Add support for legacy update/digest methods of Hash.
+
+
+[npm-image]: https://img.shields.io/npm/v/crc-hash.svg
+[npm-url]: https://npmjs.org/package/crc-hash
+[github-tag-image]: https://img.shields.io/github/tag/DavidAnson/crc-hash.svg
+[github-tag-url]: https://github.com/DavidAnson/crc-hash
+[travis-image]: https://img.shields.io/travis/DavidAnson/crc-hash.svg
+[travis-url]: https://travis-ci.org/DavidAnson/crc-hash
+[coveralls-image]: https://img.shields.io/coveralls/DavidAnson/crc-hash.svg
+[coveralls-url]: https://coveralls.io/r/DavidAnson/crc-hash
+[license-image]: https://img.shields.io/npm/l/crc-hash.svg
+[license-url]: http://opensource.org/licenses/MIT
