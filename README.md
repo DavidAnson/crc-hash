@@ -63,10 +63,11 @@ See also:
 * 0.1.0 - Initial release, supports Stream programming model.
 * 0.2.0 - Add support for legacy update/digest methods of Hash.
 * 0.2.1 - Add badges for npm, GitHub, build, coverage, and license to README.
+* 0.2.2 - Update URI for npm, tweak .travis.yml.
 
 
 [npm-image]: https://img.shields.io/npm/v/crc-hash.svg
-[npm-url]: https://npmjs.org/package/crc-hash
+[npm-url]: https://www.npmjs.com/package/crc-hash
 [github-tag-image]: https://img.shields.io/github/tag/DavidAnson/crc-hash.svg
 [github-tag-url]: https://github.com/DavidAnson/crc-hash
 [travis-image]: https://img.shields.io/travis/DavidAnson/crc-hash.svg

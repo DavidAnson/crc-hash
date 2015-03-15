@@ -1,7 +1,7 @@
 {
   "name": "crc-hash",
   "description": "A Crypto Hash (Stream) implementation for the CRC algorithm.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/DavidAnson/crc-hash",
   "author": {
     "name": "David Anson",
