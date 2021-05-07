@@ -24,7 +24,7 @@
     "crc": "^3.2.1"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
+    "grunt": "^1.3.0",
     "grunt-contrib-nodeunit": "^0.4.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^6.0.0",
